@@ -1,11 +1,10 @@
 from fastapi import FastAPI
+from routes.note import note
+from fastapi.staticfiles import StaticFiles
+
 
 app = FastAPI()
 
-@app.get('/')
-def index():
-    return {'data': {'name': 'kalpana'}}
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.get('/about')
-def about():
-    return {'data': 'about'}
+app.include_router(note)
