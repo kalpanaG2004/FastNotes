@@ -1,5 +1,16 @@
+import os
 from pymongo import MongoClient
+from dotenv import load_dotenv
 
-MONGO_URI = "mongodb+srv://user594:126594@cluster0.gjqxac6.mongodb.net/"
+# Load environment variables from .env file
+load_dotenv()
 
-conn = MongoClient(MONGO_URI)
+# Get the MongoDB URI from the environment variables
+MONGO_URI = os.getenv("MONGO_URI")
+
+# Connect to MongoDB
+if MONGO_URI:
+    conn = MongoClient(MONGO_URI)
+    print("Successfully connected to MongoDB.")
+else:
+    print("MongoDB URI not found in environment variables.")
